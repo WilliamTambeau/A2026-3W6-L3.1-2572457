@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZombieParty.Models.Data;
 
@@ -10,9 +11,11 @@ using ZombieParty.Models.Data;
 namespace ZombieParty.Migrations
 {
     [DbContext(typeof(ZombiePartyDbContext))]
-    partial class ZombiePartyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260910155751_Ajout_Annotations_ShortDesc_Zombie")]
+    partial class Ajout_Annotations_ShortDesc_Zombie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +61,6 @@ namespace ZombieParty.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Point")
-                        .HasColumnType("int");
-
                     b.Property<string>("TypeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -73,17 +73,12 @@ namespace ZombieParty.Migrations
             modelBuilder.Entity("ZombieParty.Models.Zombie", b =>
                 {
                     b.HasOne("ZombieParty.Models.ZombieType", "ZombieType")
-                        .WithMany("Zombies")
+                        .WithMany()
                         .HasForeignKey("ZombieTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ZombieType");
-                });
-
-            modelBuilder.Entity("ZombieParty.Models.ZombieType", b =>
-                {
-                    b.Navigation("Zombies");
                 });
 #pragma warning restore 612, 618
         }

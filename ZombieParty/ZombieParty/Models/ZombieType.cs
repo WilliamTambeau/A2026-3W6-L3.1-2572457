@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace ZombieParty.Models
 {
@@ -11,5 +12,11 @@ namespace ZombieParty.Models
         [DisplayName("Type Name")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} has to be filled.")]
         public string TypeName { get; set; }
+
+        [Range(2, 5, ErrorMessage = "{0} must be between {1} and {2}.")]
+        public int Point { get; set; }
+
+        [ValidateNever]
+        public List<Zombie>? Zombies { get; set; }
     }
 }
