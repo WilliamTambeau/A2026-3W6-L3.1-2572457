@@ -23,5 +23,7 @@ namespace ZombieParty.Models
 
         [Length(5, 20, ErrorMessage = "{0} must be between {1} and {2} characters long.")]
         public string ShortDesc { get; set; }
+
+        public List<HuntingLog>? HuntingLogs { get; set; }
     }
 }
